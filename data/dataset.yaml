@@ -1,0 +1,10 @@
+# Source data: https://www.kaggle.com/datasets/deeplearn1/fire-and-smoke-bbox-coco-dateset
+train: data/images/train # train images
+val: data/images/val # val images
+test: # test images (optional)
+
+# whether it is coco dataset, only coco dataset should be set to True.
+is_coco: False
+# Classes
+nc: 2  # number of classes
+names: ['fire', 'smoke']  # class names
