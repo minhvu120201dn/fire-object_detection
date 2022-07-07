@@ -95,8 +95,13 @@ class Inferer:
                 if save_img:
                     cv2.imwrite(save_path, img_src)
             else:
-                with open(txt_path + '.txt', 'w') as f:
-                    pass
+                if save_txt:
+                    with open(txt_path + '.txt', 'w') as f:
+                        pass
+                img_src = np.asarray(img_ori)
+                if save_img:
+                    cv2.imwrite(save_path, img_src)
+
 
     @staticmethod
     def precess_image(path, img_size, stride, half):

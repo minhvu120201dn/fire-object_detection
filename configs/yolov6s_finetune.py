@@ -1,7 +1,7 @@
 # YOLOv6s model
 model = dict(
     type='YOLOv6s',
-    pretrained='./weights/yolov6s.pt',
+    pretrained='runs/train/exp18/weights/last_ckpt.pt',
     depth_multiple=0.33,
     width_multiple=0.50,
     backbone=dict(
@@ -29,13 +29,13 @@ model = dict(
 solver = dict(
     optim='SGD',
     lr_scheduler='Cosine',
-    lr0=0.0032,
-    lrf=0.12,
-    momentum=0.843,
-    weight_decay=0.00036,
-    warmup_epochs=2.0,
-    warmup_momentum=0.5,
-    warmup_bias_lr=0.05
+    lr0=0.008,
+    lrf=0.008,
+    momentum=0.99,
+    weight_decay=0.0003,
+    warmup_epochs=3.0,
+    warmup_momentum=0.8,
+    warmup_bias_lr=0.07
 )
 
 data_aug = dict(
