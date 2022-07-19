@@ -1,0 +1,21 @@
+data_path: data/dataset.yaml
+conf_file: configs/yolov6s_finetune.py
+img_size: 640
+batch_size: 32
+epochs: 300
+workers: 1
+device: '0'
+eval_interval: 20
+eval_final_only: false
+heavy_eval_range: 50
+check_images: false
+check_labels: false
+output_dir: ./runs/train
+name: exp
+dist_url: 'default url: tcp://127.0.0.1:8888'
+gpu_count: 0
+local_rank: -1
+resume: null
+rank: -1
+world_size: 1
+save_dir: runs\train\exp20
