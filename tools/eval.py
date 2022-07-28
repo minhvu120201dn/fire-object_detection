@@ -17,7 +17,7 @@ from yolov6.utils.general import increment_name
 
 def get_args_parser(add_help=True):
     parser = argparse.ArgumentParser(description='YOLOv6 PyTorch Evalating', add_help=add_help)
-    parser.add_argument('--data', type=str, default='.', help='dataset.yaml path')
+    parser.add_argument('--data', type=str, default='./data/coco.yaml', help='dataset.yaml path')
     parser.add_argument('--weights', type=str, default='./weights/yolov6s.pt', help='model.pt path(s)')
     parser.add_argument('--batch-size', type=int, default=32, help='batch size')
     parser.add_argument('--img-size', type=int, default=640, help='inference size (pixels)')
@@ -59,8 +59,11 @@ def run(data,
 
      # task
     Evaler.check_task(task)
-    save_dir = str(increment_name(osp.join(save_dir, name)))
-    os.makedirs(save_dir, exist_ok=True)
+    if task == 'train':
+        save_dir = save_dir
+    else:
+        save_dir = str(increment_name(osp.join(save_dir, name)))
+        os.makedirs(save_dir, exist_ok=True)
 
     # reload thres/device/half/data according task
     conf_thres, iou_thres = Evaler.reload_thres(conf_thres, iou_thres, task)
@@ -76,9 +79,9 @@ def run(data,
 
     # eval
     model.eval()
-    pred_result = val.predict_model(model, dataloader, task)
+    pred_result, vis_outputs, vis_paths = val.predict_model(model, dataloader, task)
     eval_result = val.eval_model(pred_result, model, dataloader, task)
-    return eval_result
+    return eval_result, vis_outputs, vis_paths
 
 
 def main(args):
